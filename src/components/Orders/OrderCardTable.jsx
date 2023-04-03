@@ -56,26 +56,30 @@ export default function CardTable({
     const itemPost = JSON.parse(JSON.stringify(item));
     itemPost.customer = itemPost.customer._id;
 
-    if (itemPost.delivery_status === 0) {
+    if (itemPost.delivery_status === 0)
+    {
+      let check = false;
       itemPost.details.forEach(async (detail) => {
         const product = await getByIdProduct(detail.product_id);
-        product.variants.forEach((variant) => {
-          if (detail.color === variant.color && detail.hex === variant.hex) {
-            variant.list_sizes.forEach((size) => {
-              if (size.size === detail.size) {
-                const quantity = Number(size.quantity);
-                if (quantity > detail.quantity) {
-                  size.quantity = quantity - detail.quantity;
-                  handlePost(itemPost, 1)
-                    .then((res) => {
-                      toast.success('Cập nhật thành công!');
-                    })
-                    .catch((err) => toast.error(err.response.data.message));
-                } else toast.info('Số lượng trong kho không đủ');
-              }
-            });
-          }
-        });
+        const indexVariant = product.variants.findIndex(
+          (variant) =>
+            variant.color === detail.color && variant.hex === detail.hex
+        );
+        const indexSize = product.variants[indexVariant].list_sizes.findIndex(
+          (size) => size.size === detail.size
+        );
+        let quantity = Number(
+          product.variants[indexVariant].list_sizes[indexSize].quantity
+        );
+        if (quantity >= detail.quantity) {
+          product.variants[indexVariant].list_sizes[indexSize].quantity =
+            quantity - detail.quantity;
+          handlePost(itemPost, 1)
+            .then((res) => {
+              check = true;
+            })
+            .catch((err) => check = false);
+        } else check=false;
 
         product.brand = product.brand?.id;
         product.category = product.category?.id;
@@ -85,6 +89,9 @@ export default function CardTable({
         product.supplier = product.supplier?.id;
         await update(product);
       });
+
+      if (check) toast.success('Cập nhật thành công!');
+      else toast.error('Có lỗi xảy ra!');
     } else
       handlePost(itemPost, 1)
         .then((res) => {

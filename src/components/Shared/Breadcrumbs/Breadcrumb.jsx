@@ -3,14 +3,14 @@ import { Link } from 'react-router-dom';
 function Breadcrumb({ breadcrumbs }) {
   return (
     <nav
-      className='inline-flex bg-white text-gray-700 border border-gray-200 py-3 px-5 rounded-md dark:bg-gray-800 dark:border-gray-700 mb-2'
+      className='inline-flex bg-white text-gray-700 border border-gray-200 py-3 px-5 rounded-md mb-2'
       aria-label='Breadcrumb'
     >
       <ol className='inline-flex items-center space-x-1 md:space-x-3'>
         <li className='inline-flex items-center'>
           <Link
             to='/'
-            className='text-sm text-gray-600 hover:text-gray-900 inline-flex items-center dark:text-gray-400 dark:hover:text-white font-medium'
+            className='text-sm text-gray-600 hover:text-gray-900 inline-flex items-center font-medium'
           >
             <svg
               className='w-4 h-4 mr-2'

@@ -92,13 +92,12 @@ export default function Modal({
       handlePost(dataPost, itemSelected ? 1 : 0)
         .then((res) => {
           const newData = JSON.parse(JSON.stringify(data));
-if (itemSelected) {
+          if (itemSelected) {
             const index = newData.findIndex(
               (item) => item._id === itemSelected._id
             );
             newData[index] = dataPost;
-          } else
-          {
+          } else {
             dataPost._id = res.data.data._id;
             dataPost.id = res.data.data.id;
             dataPost.createdAt = res.data.data.createdAt;
