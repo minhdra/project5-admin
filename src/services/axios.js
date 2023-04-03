@@ -8,7 +8,6 @@ const instance = axios.create({
   baseURL: BASE_API_URL,
   headers: {
     'auth-token': token,
-    'Access-Control-Allow-Origin': '*',
   }
 });
 

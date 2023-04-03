@@ -14,6 +14,7 @@ import {
   statisticProducts,
   statisticUserOfMonth,
 } from '../../services/statistic';
+// import { useNavigate } from 'react-router';
 
 export default function Dashboard({ setTitle }) {
   useEffect(() => {
@@ -26,6 +27,8 @@ export default function Dashboard({ setTitle }) {
   const [totalOfProducts, setTotalOfProducts] = useState();
 
   useEffect(() => {
+    if (!window.sessionStorage.getItem('USER_TOKEN'))
+      window.location.reload();
     const date = new Date(Date.now());
     const optionDateNow = {
       month: date.getMonth() + 1,
