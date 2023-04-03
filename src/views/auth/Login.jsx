@@ -58,7 +58,7 @@ export default function Login({ setTitle }) {
               }
             }, 3000);
           })
-          // .catch((err) => toast.error(err.response.data.message));
+          .catch((err) => toast.error(err.response.data.message));
       }
     }
   };
