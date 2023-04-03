@@ -42,7 +42,7 @@ export default function Login({ setTitle }) {
       } else {
         login(user)
           .then((res) => {
-            const data = res.data.data._id;
+            const data = res?.data?.data?._id;
             window.sessionStorage.setItem('USER_TOKEN', res.data.data.accessToken);
             setData(data);
             toast.success(res.data.message);
