@@ -81,9 +81,14 @@ const listSidebar = {
     },
   ],
   website: [
+    // {
+    //   title: 'Slides',
+    //   link: '/slides',
+    //   icon: 'fa-regular fa-images',
+    // },
     {
-      title: 'Slides',
-      link: '/slides',
+      title: 'Pages',
+      link: '/pages',
       icon: 'fa-regular fa-images',
     },
   ],

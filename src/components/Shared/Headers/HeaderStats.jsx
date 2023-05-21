@@ -23,9 +23,9 @@ export default function HeaderStats({
                   statSubtitle='NGƯỜI DÙNG MỚI TRONG THÁNG'
                   statTitle={(totalUsers?.data || '0') + ' người dùng'}
                   statArrow={totalUsers?.status}
-                  statPercent={totalUsers?.percent + ''}
+                  statPercent={totalUsers?.percent || '0'}
                   statPercentColor='text-red-500'
-                  statDescripiron='Từ tháng trước'
+                  statDescription='Từ tháng trước'
                   statIconName='fas fa-users'
                   statIconColor='bg-red-500'
                 />
@@ -40,9 +40,9 @@ export default function HeaderStats({
                       : '0')
                   }
                   statArrow={totalOfMonth?.status}
-                  statPercent={totalOfMonth?.percent + ''}
+                  statPercent={totalOfMonth?.percent || '0'}
                   statPercentColor='text-red-500'
-                  statDescripiron='Từ tháng trước'
+                  statDescription='Từ tháng trước'
                   statIconName='fas fa-chart-pie'
                   statIconColor='bg-orange-500'
                 />
@@ -54,9 +54,9 @@ export default function HeaderStats({
                     (ordersDeliveredOfMonth?.data || '0') + ' đơn hàng'
                   }
                   statArrow={ordersDeliveredOfMonth?.status || ''}
-                  statPercent={ordersDeliveredOfMonth?.percent + ''}
+                  statPercent={ordersDeliveredOfMonth?.percent || '0'}
                   statPercentColor='text-orange-500'
-                  statDescripiron='Từ tháng trước'
+                  statDescription='Từ tháng trước'
                   statIconName='far fa-chart-bar'
                   statIconColor='bg-pink-500'
                 />
@@ -68,7 +68,7 @@ export default function HeaderStats({
                   statArrow='up'
                   statPercent=''
                   statPercentColor='text-white'
-                  statDescripiron=''
+                  statDescription=''
                   statIconName='fas fa-percent'
                   statIconColor='bg-sky-500'
                 />

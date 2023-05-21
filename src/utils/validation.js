@@ -289,3 +289,19 @@ export function modalInvoiceValidator(data) {
 
   return rule.validate(data, { abortEarly: false });
 }
+
+export function modalNavigationValidator(data) {
+  const rule = Joi.object({
+    ...data,
+    title: Joi.string().required(),
+    path: Joi.string().required(),
+    isAdmin: Joi.boolean().required(),
+    order: Joi.number().required(),
+  }).messages({
+    'string.empty': `Không được để trống.`,
+    'date.base': `Không đúng định dạng`,
+    'number.base': `Không đúng định dạng`,
+  });
+
+  return rule.validate(data, { abortEarly: false });
+}

@@ -12,7 +12,7 @@ import Settings from './views/admin/Settings';
 import Staff from './views/admin/Staff';
 import Customer from './views/admin/Customer';
 import Products from './views/admin/Products';
-import Slides from './views/admin/Slides';
+// import Slides from './views/admin/Slides';
 import Brand from './views/admin/Brand';
 import Category from './views/admin/Category';
 import SubCategory from './views/admin/SubCategory';
@@ -20,6 +20,7 @@ import Supplier from './views/admin/Supplier';
 import Collection from './views/admin/Collection';
 import ImportProduct from './views/admin/ImportProduct';
 import Invoice from './views/admin/Invoice';
+import Navigation from './views/admin/Navigation';
 
 // Landing pages
 import Login from './views/auth/Login';
@@ -53,7 +54,8 @@ export default function App() {
             <Route path='/invoices/:slug' element={<ImportProduct setTitle={setTitle} />} />
             <Route path='/customers' element={<Customer setTitle={setTitle} />} />
             <Route path='/staffs' element={<Staff setTitle={setTitle} />} />
-            <Route path='/slides' element={<Slides setTitle={setTitle} />} />
+            {/* <Route path='/slides' element={<Slides setTitle={setTitle} />} /> */}
+            <Route path='/pages' element={<Navigation setTitle={setTitle} />} />
           </Route>
           <Route element={<Auth />}>
             <Route index path='/login' element={<Login setTitle={setTitle} />} />
