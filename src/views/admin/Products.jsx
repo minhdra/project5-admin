@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 import MainProduct from '../../components/Products/MainProduct';
 import { create, remove, search, update } from '../../services/product';
 
 export default function Products({ setTitle }) {
-  useEffect(() => { setTitle('Draco - Products'); }, [setTitle]);
+  useEffect(() => {
+    setTitle('Draco - Products');
+  }, [setTitle]);
 
   const [optionSearch, setOptionSearch] = useState({
     product_name: '',
@@ -12,39 +14,47 @@ export default function Products({ setTitle }) {
     style: '',
   });
   const [data, setData] = useState();
-  // 
+  //
 
   // Get data
   useEffect(() => {
-    searchData(optionSearch)
+    searchData(optionSearch);
   }, [optionSearch]);
 
   const searchData = (option) => {
-    search(option).then((res) => setData(res)).catch((err) => console.log(err.message));
-  }
+    search(option)
+      .then((res) => setData(res))
+      .catch((err) => console.log(err));
+  };
 
   const handlePost = (option, action) => {
-    if (option)
-    {
+    if (option) {
       switch (action) {
         case 0:
           return create(option);
-          // break;
+        // break;
         case 1:
           return update(option);
-          // break;
+        // break;
         case 2:
           return remove(option);
-          // break;
+        // break;
         default:
           break;
       }
     }
-  }
+  };
 
   return (
     <div className='min-h-screen p-4'>
-      <MainProduct data={data} setData={setData} optionSearch={optionSearch} searchData={searchData} handlePost={handlePost} setOptionSearch={setOptionSearch} />
+      <MainProduct
+        data={data}
+        setData={setData}
+        optionSearch={optionSearch}
+        searchData={searchData}
+        handlePost={handlePost}
+        setOptionSearch={setOptionSearch}
+      />
     </div>
   );
 }
