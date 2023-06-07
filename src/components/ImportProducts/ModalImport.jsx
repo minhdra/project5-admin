@@ -112,7 +112,7 @@ export default function Modal({
         variant.status = false;
         data.variants.push(variant);
       }
-      data.brand = data.brand.id;
+      data.brand = data?.brand?.id;
       data.category = data.category?.id;
       data.category_sub = data.category_sub?.id;
       data.collect = data.collect?.id;

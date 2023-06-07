@@ -67,7 +67,7 @@ export default function Modal({
       setDescription(itemSelected.description);
       setThumbnailURL(itemSelected.thumbnail);
       setSubCategorySelect(itemSelected.category_sub || {});
-      setBrandSelect(itemSelected.brand.id);
+      setBrandSelect(itemSelected?.brand?.id);
       setDiscountSelect(itemSelected?.discount?.id ?? '');
       setCollectionSelect(itemSelected?.collect?.id ?? '');
       setCategory(itemSelected.category);
