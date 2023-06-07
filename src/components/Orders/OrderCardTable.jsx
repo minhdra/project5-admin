@@ -10,6 +10,8 @@ import {
   getProductById as getByIdProduct,
   update,
 } from '../../services/product';
+import { getById } from '../../services/customer';
+import { sendChangeStatusOrder } from '../../services/email';
 
 // components
 
@@ -56,8 +58,7 @@ export default function CardTable({
     const itemPost = JSON.parse(JSON.stringify(item));
     itemPost.customer = itemPost.customer._id;
 
-    if (itemPost.delivery_status === 0)
-    {
+    if (itemPost.delivery_status === 0) {
       let check = false;
       itemPost.details.forEach(async (detail) => {
         const product = await getByIdProduct(detail.product_id);
@@ -77,9 +78,10 @@ export default function CardTable({
           handlePost(itemPost, 1)
             .then((res) => {
               check = true;
+              handleSendStatusOrder(item, itemPost.delivery_status);
             })
-            .catch((err) => check = false);
-        } else check=false;
+            .catch((err) => (check = false));
+        } else check = false;
 
         product.brand = product.brand?.id;
         product.category = product.category?.id;
@@ -93,11 +95,11 @@ export default function CardTable({
       if (check) toast.success('Cập nhật thành công!');
       else toast.error('Có lỗi xảy ra!');
     } else
-      handlePost(itemPost, 1)
-        .then((res) => {
-          toast.success('Cập nhật thành công!');
-        })
-        .catch((err) => toast.error(err.response.data.message));
+      handlePost(itemPost, 1).then((res) => {
+        toast.success('Cập nhật thành công!');
+        handleSendStatusOrder(item, itemPost.delivery_status);
+      });
+    // .catch((err) => toast.error(err.response.message));
   };
 
   const handleChangePaidStatus = (item) => {
@@ -109,6 +111,25 @@ export default function CardTable({
         toast.success('Cập nhật thành công!');
       })
       .catch((err) => toast.error(err.response.data.message));
+  };
+
+  const handleSendStatusOrder = async (item, status) => {
+    if (item) {
+      const response = await getById(item.customer._id);
+      Object.entries(common.orderStatuses).forEach(([key, value]) => {
+        if (status === value.id) {
+          status = value.message;
+          return;
+        }
+      });
+
+      sendChangeStatusOrder({
+        ...item.customer,
+        order_id: item.id,
+        email: response?.user?.email,
+        status,
+      });
+    }
   };
 
   return (
